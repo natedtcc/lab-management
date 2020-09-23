@@ -1,0 +1,44 @@
+<?php # footer.html - N. Nasteff
+
+// This footer provides students (and admins) with login and logout links.
+// The admin login is only visible from the index.php site.
+
+
+echo '</div></div></div></div></div></div><center><footer style="position: fixed; left: 0; bottom: 0; width: 100%; overflow: hidden; background-color: #f2f0e6;">';
+
+// If a student is logged in, display a link in the footer to log out..
+
+if (isset($_SESSION['student_id'])){
+
+	echo '  <a href="logout.php">Log out</a><br><small>Copyright 2019 DTCC</small></footer></body></html>';
+}
+
+// Make exceptions for when the admin login link will appear. It will not appear
+// in the login or register pages, or any pages after the student logs in since 
+// this checks for an admin id 
+
+elseif (!isset($_SESSION['admin_id']) && $page_title != 'Login' && $page_title != 'Register') {
+	echo '<a href="admin_login.php">Admin Login</a><br><small>Copyright 2019 DTCC</small></a></footer></body></html>';
+}
+
+// Always print the copyright info
+// Also, display a logout link for admins while they are logged in..
+
+else {
+
+	if (isset($_SESSION['admin_id'])){
+
+	echo '<a href="logout.php">Log out</a><br>';
+
+	}
+
+	echo '<small>Copyright 2019 DTCC</small></a></footer></body></html>';
+	
+}
+
+
+// Flush the output buffer via the footer
+
+ob_end_flush();
+?>
+

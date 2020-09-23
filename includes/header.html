@@ -1,0 +1,50 @@
+<?php # header.html - N.Nasteff
+// This header includes the session start, config require, and layout files / meta tags
+
+// This check allows home.php to call it's own session_start, without calling
+// the one in the header as well. Every other page will start a session 
+// from header.html (this file)
+
+// Set cookie/session max lifetime (in seconds)
+
+if (session_status()!== PHP_SESSION_ACTIVE){
+
+session_start();
+
+}
+
+// Require header / config files
+
+require('includes/config.php');
+require('db_config.php');
+
+
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title><?php echo (isset($page_title)) ? $page_title : 'ITN Drive Management'; ?></title>
+    <meta charset="utf-8">
+    <meta name="description" content="Delwaware Tech ITN Drive Assignments">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="author" content="N. Nasteff">
+    <link rel="stylesheet" href="includes/bootstrap.min.css">
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+    <link href="includes/custom.css" rel="stylesheet">
+    
+</head>
+<body>
+    <div class="header_custom">
+       <div class="panel-body" >
+         <center><a href="home.php"><img src="includes/mydtcc_logo.png" alt="Delaware Tech" vspace="10" style=" width: 350px; height: 75px;"></a></div>
+         </div>     </center></div>
+         <div class="body_main">
+         <h1 class="display-4"><?php echo (isset($page_header)) ? $page_header : 'Welcome'; ?></center></h1>
+  
+
+  
