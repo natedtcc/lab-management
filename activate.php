@@ -7,39 +7,41 @@
 
 $page_title = 'Activation';
 $page_header = 'Activation';
-include ('includes/header.html');
+include('includes/header.html');
 
 // Check for a hash
 
-if (isset($_GET['h'])){
+if (isset($_GET['h'])) {
 
-	// Assign hash value to variable
-	
-	$hash = $_GET['h'];
+  // Assign hash value to variable
 
-	// DB Query - set the user as active for the specified hash that was generated on account creation
+  $hash = $_GET['h'];
 
-	$activate_query = "UPDATE students SET active=1 WHERE hash='$hash' AND active=0";
-	$result = mysqli_query($db_conn, $activate_query) or trigger_error("Query: $activate_query\n<br />MySQL Error: " . mysqli_error($db_conn));
+  // DB Query - set the user as active for the specified 
+  // hash that was generated on account creation
 
-	// If query was a success, generate success message...
+  $activate_query = "UPDATE students SET active=1 WHERE hash='$hash' AND active=0";
+  $result = mysqli_query($db_conn, $activate_query) or
+    trigger_error("Query: $activate_query\n<br />MySQL Error: " . mysqli_error($db_conn));
 
-	if (mysqli_affected_rows($db_conn) == 1) {
-		success_string_gen('Account activated!<br>You may now<br><a href="login.php"><b>log in</a>');
-	}
+  // If query was a success, generate success message...
 
-	// If the query failed (incorrect hash), display error..
+  if (mysqli_affected_rows($db_conn) == 1) {
+    success_string_gen(
+      'Account activated!<br>You may now<br><a href="login.php"><b>log in</a>'
+    );
+  }
 
-	else {
-		error_string_gen('Sorry, there was an error.');
-		exit();
-	}
+  // If the query failed (incorrect hash), display error..
+
+  else {
+    error_string_gen('Sorry, there was an error.');
+    exit();
+  }
 }
 // If hash is unset, display error and quit the script
 
 else {
-	error_string_gen('You have reached this page in error.<br>Contact the administrator.');
-	exit();
+  error_string_gen('You have reached this page in error.<br>Contact the administrator.');
+  exit();
 }
-
-?>

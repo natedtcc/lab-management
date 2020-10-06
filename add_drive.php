@@ -68,7 +68,10 @@ elseif (isset($_SESSION['admin_id']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
 
         // Create SQL query for adding a server to the DB
 
-        $insert_query = "INSERT INTO drives (drive_num, serial, capacity, form_factor, broken) VALUES ($drive_num, '$serial', $capacity, $form_factor, '$broken')";
+        $insert_query = 
+        "INSERT INTO drives (drive_num, serial, capacity, form_factor, broken)
+        VALUES ($drive_num, '$serial', $capacity, $form_factor, '$broken')";
+        
         sql_results($insert_query, $db_conn);
 
         // If the query was successful, notify the user, redirect and exit...
@@ -97,5 +100,3 @@ else {
 }
 
 include('includes/footer.html');
-
-?>
