@@ -33,7 +33,8 @@ if (isset($_SESSION['admin_id'])) {
 
   else {
 
-    error_string_gen("You have reached this page in error. Please go back and try again, or contact the admin.");
+    error_string_gen("You have reached this page in error. Please go back and "
+      . "try again, or contact the admin.");
     exit();
   }
 
@@ -48,11 +49,11 @@ if (isset($_SESSION['admin_id'])) {
 
     mysqli_begin_transaction($db_conn, MYSQLI_TRANS_START_READ_WRITE);
 
-    $valid = sql_results($delete_query, $db_conn);
-    $valid2 = sql_results($update_query, $db_conn);
-    $valid3 = sql_results($student_update, $db_conn);
+    $check_delete = sql_results($delete_query, $db_conn);
+    $check_update = sql_results($update_query, $db_conn);
+    $check_student = sql_results($student_update, $db_conn);
 
-    if ($valid && $valid2 && $valid3) {
+    if ($check_delete && $check_update && $check_student) {
       mysqli_commit($db_conn);
       success_string_gen('Records deleted successfully.</h3><br><h5>You are being redirected.');
       redirect_user('view_drive_leases.php');
